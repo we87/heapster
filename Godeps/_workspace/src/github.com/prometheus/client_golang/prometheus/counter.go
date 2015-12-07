@@ -15,7 +15,6 @@ package prometheus
 
 import (
 	"errors"
-	"hash/fnv"
 )
 
 // Counter is a Metric that represents a single numerical value that only ever
@@ -33,7 +32,7 @@ type Counter interface {
 
 	// Set is used to set the Counter to an arbitrary value. It is only used
 	// if you have to transfer a value from an external counter into this
-	// Prometheus metrics. Do not use it for regular handling of a
+	// Prometheus metric. Do not use it for regular handling of a
 	// Prometheus counter (as it can be used to break the contract of
 	// monotonically increasing values).
 	Set(float64)
@@ -97,7 +96,6 @@ func NewCounterVec(opts CounterOpts, labelNames []string) *CounterVec {
 		MetricVec: MetricVec{
 			children: map[uint64]Metric{},
 			desc:     desc,
-			hash:     fnv.New64a(),
 			newMetric: func(lvs ...string) Metric {
 				result := &counter{value: value{
 					desc:       desc,
