@@ -32,10 +32,10 @@ const (
 )
 
 func TestEmptyInput(t *testing.T) {
-	timeseries, err := NewDecoder().TimeseriesFromPods([]*cache.PodElement{})
+	timeseries, err := NewDecoderWithRancher().TimeseriesFromPods([]*cache.PodElement{})
 	assert.NoError(t, err)
 	assert.Empty(t, timeseries)
-	timeseries, err = NewDecoder().TimeseriesFromContainers([]*cache.ContainerElement{})
+	timeseries, err = NewDecoderWithRancher().TimeseriesFromContainers([]*cache.ContainerElement{})
 	assert.NoError(t, err)
 	assert.Empty(t, timeseries)
 }
@@ -44,7 +44,7 @@ func TestFuzzInput(t *testing.T) {
 	var pods []*cache.PodElement
 	f := fuzz.New().NumElements(2, 10)
 	f.Fuzz(&pods)
-	_, err := NewDecoder().TimeseriesFromPods(pods)
+	_, err := NewDecoderWithRancher().TimeseriesFromPods(pods)
 	assert.NoError(t, err)
 }
 
@@ -129,7 +129,7 @@ func TestRealInput(t *testing.T) {
 			Containers: containers,
 		},
 	}
-	timeseries, err := NewDecoder().TimeseriesFromPods(pods)
+	timeseries, err := NewDecoderWithRancher().TimeseriesFromPods(pods)
 	assert.NoError(t, err)
 	assert.NotEmpty(t, timeseries)
 	expectedFsStats := getFsStatsFromContainerElement(containers)
@@ -235,7 +235,7 @@ func copyMetric(el *cache.ContainerMetricElement) *cache.ContainerMetricElement 
 }
 
 func TestNoDuplicates(t *testing.T) {
-	decoder := NewDecoder()
+	decoder := NewDecoderWithRancher()
 	c := getContainerElement("container1")
 	now := time.Now()
 

@@ -88,7 +88,7 @@ func NewManager(sources []source_api.Source, sinkManager sinks.ExternalSinkManag
 		modelDuration: modelDuration,
 		lastSync:      time.Now().Round(res),
 		resolution:    res,
-		decoder:       sink_api.NewDecoder(),
+		decoder:       sink_api.NewDecoderWithRancher(),
 		mainStopChan:  make(chan struct{}),
 		modelStopChan: make(chan struct{}),
 		sinkStopChan:  sinkManager.Sync(),

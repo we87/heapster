@@ -63,7 +63,7 @@ func supportedMetricsDescriptors() []sink_api.MetricDescriptor {
 // the sinks in 'externalSinks', which is a map of sink name to ExternalSink object.
 func NewExternalSinkManager(externalSinks []sink_api.ExternalSink, cache cache.Cache, syncFrequency time.Duration) (ExternalSinkManager, error) {
 	m := &externalSinkManager{
-		decoder:       sink_api.NewDecoder(),
+		decoder:       sink_api.NewDecoderWithRancher(),
 		cache:         cache,
 		lastSync:      lastSync{},
 		syncFrequency: syncFrequency,

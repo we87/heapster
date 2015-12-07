@@ -136,7 +136,7 @@ func TestSetSinksRegisterAgain(t *testing.T) {
 
 func newExternalSinkManager(externalSinks []sink_api.ExternalSink, cache cache.Cache, syncFrequency time.Duration) (*externalSinkManager, error) {
 	m := &externalSinkManager{
-		decoder:       sink_api.NewDecoder(),
+		decoder:       sink_api.NewDecoderWithRancher(),
 		cache:         cache,
 		lastSync:      lastSync{zeroTime, zeroTime, zeroTime},
 		syncFrequency: syncFrequency,
