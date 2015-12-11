@@ -47,7 +47,7 @@ func (self *rancherDecoder) mapToK8sContainer(container *cache.ContainerElement)
 	com := strings.SplitN(containerName, "/", 3)
 	if len(com) > 1 {
 		labels[LabelPodName.Key] = com[len(com)-1]
-		containerName = com[1]
+		containerName = labels[LabelPodName.Key]
 		if h, ok := cLabel["io.rancher.container.uuid"]; ok {
 			containerName += "-" + h[:8]
 		}

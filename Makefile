@@ -1,6 +1,6 @@
 all: build
 
-TAG = v0.18.1-we87-1
+TAG = v0.18.1-we87-2
 PREFIX = we87
 FLAGS =
 
